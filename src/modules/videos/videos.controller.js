@@ -19,7 +19,7 @@ export const getVideoByIdEdu = asyncHandler(async (req, res, next) => {
      }
  
      // Perform role-based authorization for educational videos
-     if (!['admin', 'member'].includes(req.member.role)) {
+     if (!['super','admin', 'member'].includes(req.member.role)) {
          return next(new Error('You are not authorized to view this educational video'));
      }
  

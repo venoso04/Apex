@@ -12,7 +12,7 @@ export const adminsRouter = Router()
 
 adminsRouter.post('/add-members',
      isAuthenticated,
-     isAuthorized(systemRoles.ADMIN),
+     isAuthorized(systemRoles.ADMIN,systemRoles.SUPER),
      validation(allowedMembersSchema),
      addAllowedMember)
 
