@@ -6,9 +6,11 @@ import { asyncHandler } from "../utils/common/asyncHandler.js";
 
 export const isAuthenticated = asyncHandler(async (req, res, next) => {
   let token = req.headers["token"];
+  
   if (!token || !token.startsWith(process.env.BEARER_KEY))
     return next(new Error("valid token is required !"));
   token = token.split(process.env.BEARER_KEY)[1];
+  
   const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
   if (!decoded) return next(new Error("invalid token!"));
   const tokenDB = await Token.findOne({ token, isValid: true });

@@ -6,6 +6,8 @@ import { validation } from '../../middleware/validation.middleware.js';
 import { forgetCodeSchema, loginSchema, resetPasswordSchema, signUpSchema, updateEmailSchema, updatePasswordSchema, verifyUpdateEmailSchema } from "./auth.validation.js";
 import { isAuthenticated } from "../../middleware/authentication.middleware.js";
 import { resendEmailLimiter } from "../../middleware/rateLimiter.middleware.js";
+import { multerMiddleHost } from "../../middleware/multer.middleware.js";
+import { allowedExtensions } from "../../utils/allowedExtensions.js";
 
 
 const authRouter = Router();
