@@ -8,6 +8,7 @@ import { adminsRouter } from "./src/modules/admins/admins.router.js";
 import authRouter from "./src/modules/auth/auth.router.js";
 import { subTeamsRouter } from "./src/modules/subteams/subteams.router.js";
 import { videosRouter } from "./src/modules/videos/videos.router.js";
+import galleryRouter from "./src/modules/gallery/gallery.router.js";
 
 // initialize env
 dotenv.config();
@@ -27,6 +28,7 @@ app.use("/members", authRouter);
 app.use("/admins", adminsRouter);
 app.use("/subteams", subTeamsRouter);
 app.use("/videos", videosRouter);
+app.use("/gallery", galleryRouter);
 
 //page not found
 app.all("*", (req, res, next) => {

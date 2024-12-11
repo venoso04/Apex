@@ -52,6 +52,16 @@ const memberSchema = new Schema({
     enum: Object.values(systemRoles), 
     default: systemRoles.MEMBER
   },
+  profilePicture:{
+    secure_url : {
+      type : String,
+      default : null
+    },
+    public_id:{
+      type: String,
+      default : null
+    }
+  },
   isDeleted: {
     type: Boolean,
     default: false
