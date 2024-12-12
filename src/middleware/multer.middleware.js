@@ -24,3 +24,4 @@ export let multerMiddleHost = (extensions = allowedExtensions.image) => {
   let file = multer({ fileFilter, storage });
   return file;
 };
+

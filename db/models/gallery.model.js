@@ -6,11 +6,11 @@ const gallerySchema = new Schema({
     required: true,
     trim: true  
   },
-  image_url: {
-     type: String,
-     required: true
+  Image:{
+    secure_url:{type:String, required:true},
+    public_id:{type:String, required:true, unique:true,},
     },
-  alt_text: {
+    description: {
      type: String,
      default: "" 
     },
@@ -22,6 +22,7 @@ const gallerySchema = new Schema({
   team: {
     type: String,
     enum: ['Operation', 'Shell', 'Formula', 'Ever'],
+    default : null
   },
   subTeam: {
     type: String,
@@ -39,6 +40,7 @@ const gallerySchema = new Schema({
       'External Relations',
       'CS',
     ],
+    default : null
   },
   priority: {
     type: Number,
@@ -48,7 +50,15 @@ const gallerySchema = new Schema({
     type: Boolean,
     default: false, // Used to mark items for special display (e.g. homepage slider)
   },
-  uploaded_by: { type: Schema.Types.ObjectId, ref: "User" }
+    landingPageVisibility: {
+        type: Boolean,
+        default: false 
+      }, 
+    gallerySectionVisibility: {
+        type: Boolean,
+        default: true 
+      }, 
+  uploadedBy: { type: Schema.Types.ObjectId, ref: "User" }
   
 },{timestamps : true});
 
