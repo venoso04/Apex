@@ -9,6 +9,8 @@ import authRouter from "./src/modules/auth/auth.router.js";
 import { subTeamsRouter } from "./src/modules/subteams/subteams.router.js";
 import { videosRouter } from "./src/modules/videos/videos.router.js";
 import galleryRouter from "./src/modules/gallery/gallery.router.js";
+import { sponsorsRouter } from "./src/modules/sponsors/sponsors.router.js";
+import { teamsRouter } from "./src/modules/teams/teams.router.js";
 
 // initialize env
 dotenv.config();
@@ -29,6 +31,8 @@ app.use("/admins", adminsRouter);
 app.use("/subteams", subTeamsRouter);
 app.use("/videos", videosRouter);
 app.use("/gallery", galleryRouter);
+app.use("/sponsors", sponsorsRouter);
+app.use("/teams",teamsRouter)
 
 //page not found
 app.all("*", (req, res, next) => {

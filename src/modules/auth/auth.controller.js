@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-dotenv.config();
 import bcrypt from "bcryptjs";
 import jsonwebtoken from "jsonwebtoken";
 import randomstring from "randomstring";
@@ -15,6 +14,7 @@ import { port } from "../../../index.js";
 import sendEmail from "../../utils/sendEmail.js";
 import cloudinaryConnection from "../../utils/cloudinary.js";
 
+dotenv.config();
 const cloudinary = cloudinaryConnection();
 
 ////////////////// sign up
@@ -129,7 +129,6 @@ export const signUp = asyncHandler(async (req, res, next) => {
 
 
 /////////////////////  Update Profile Picture 
-
 export const updateProfilePicture = asyncHandler(async (req, res, next) => {
   // 1. Validate the request
   if (!req.file) {
@@ -208,7 +207,6 @@ export const updateProfilePicture = asyncHandler(async (req, res, next) => {
 });
 
 // Delete Profile Picture API
-
 export const deleteProfilePicture = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const loggedInUser = req.member

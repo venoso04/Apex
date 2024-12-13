@@ -1,5 +1,9 @@
 import { v2 as cloudinary } from "cloudinary";
 
+import dotenv from "dotenv";
+// initialize env
+dotenv.config();
+
 let cloudinaryConnection = () => {
   cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,

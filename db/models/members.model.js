@@ -1,8 +1,6 @@
-import { Schema, model } from 'mongoose';
-import { status, systemRoles } from '../../src/utils/common/enum.js';
-
 import bcrypt from 'bcryptjs'
-// import { ref } from 'joi';
+import { Schema, model } from 'mongoose';
+import {  systemRoles } from '../../src/utils/common/enum.js';
 import { ObjectId } from 'bson';
 
 const memberSchema = new Schema({
@@ -77,7 +75,16 @@ const memberSchema = new Schema({
     },
     unique:true
   },
-  subTeamId:{type:ObjectId,ref:("SubTeam"),default: null},
+  subTeamId:{
+    type:ObjectId,
+    ref:("SubTeam"),
+
+    },
+  teamId:{
+    type:ObjectId,
+    ref:("Team"),
+
+  },
   emailUpdateCode: String,
   pendingEmail: String,
   lastEmailSentAt: { type: Date, default: null }
