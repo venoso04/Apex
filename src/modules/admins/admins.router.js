@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { addAllowedMember, addSubteam, deleteMemberById, deleteSubteamById, deleteVideoById, setMemberSubteam,addVideo, addMemberRole, removeMemberRole, setSubteamLeader } from "./admins.controller.js";
+import { addAllowedMember,  deleteMemberById,  deleteVideoById, setMemberSubteam,addVideo, addMemberRole, removeMemberRole,  setMemberTeam, getAllmembers } from "./admins.controller.js";
 import {allowedMembersSchema, validation } from "../../middleware/validation.middleware.js";
-import { subteamValidationSchema } from "../subteams/subteams.validation.js";
 import { isAuthenticated } from "../../middleware/authentication.middleware.js";
 import { isAuthorized } from "../../middleware/authorization.middleware.js";
 import { systemRoles } from "../../utils/common/enum.js";
 import { videoValidationSchema } from "../videos/videos.validation.js";
+import { deleteSubTeamValidationSchema } from "../subteams/subteams.validation.js";
 
 
 export const adminsRouter = Router()
@@ -16,28 +16,23 @@ adminsRouter.post('/add-members',
      validation(allowedMembersSchema),
      addAllowedMember)
 
-adminsRouter.post('/add-subteam',
+
+adminsRouter.patch('/set-member-team/:id',
      isAuthenticated,
      isAuthorized(systemRoles.ADMIN,systemRoles.SUPER),
-     validation(subteamValidationSchema),
-     addSubteam)
+     setMemberTeam
+)
 
-adminsRouter.delete('/delete-subteam/:id',
-     isAuthenticated,
-     isAuthorized(systemRoles.ADMIN,systemRoles.SUPER),
-     deleteSubteamById)
-
-adminsRouter.patch('/set-subteam-leader',
-     isAuthenticated,
-     isAuthorized(systemRoles.ADMIN,systemRoles.SUPER),
-     setSubteamLeader)
-
-adminsRouter.patch('/update-member-subteam/:memberId',
+adminsRouter.patch('/set-member-subteam/:id',
      isAuthenticated,
      isAuthorized(systemRoles.ADMIN,systemRoles.SUPER),
      setMemberSubteam
 )
-
+adminsRouter.get('/all-members',
+     isAuthenticated,
+     isAuthorized(systemRoles.ADMIN,systemRoles.SUPER),
+     getAllmembers
+)
 adminsRouter.delete('/delete-member/:id',
      isAuthenticated,
      isAuthorized(systemRoles.ADMIN,systemRoles.SUPER),

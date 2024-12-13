@@ -17,7 +17,17 @@ export const validation = (schema) => {
   };
 };
 
-
+export const validationSpecific = (schema, source = 'body') => {
+  return (req, res, next) => {
+    const data = req[source]; // Validate only the specified part of the request
+    const validationResult = schema.validate(data, { abortEarly: false });
+    if (validationResult.error) {
+      const errorMessages = validationResult.error.details.map((errObj) => errObj.message);
+      return next(new Error(errorMessages.join(', ')), { cause: 400 });
+    }
+    next();
+  };
+};
 // Joi schema for validating allowed members
 export const allowedMembersSchema = Joi.object({
   email: Joi.string()

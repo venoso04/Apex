@@ -23,13 +23,7 @@ const videoSchema = new Schema({
           type: String,
           enum: Object.values(vidType)
      }
-     // thumbnail: {
-     //      type: String,
-     //      required: true
-     // },
-     // views: {
-     //      type: Number,
-     //      default: 0
+
      },{timestamps: true});
 
 export const Video = model("Video", videoSchema)

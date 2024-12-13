@@ -1,42 +1,50 @@
+
 import { Schema, model } from 'mongoose';
-// import { subTeam } from '../../src/utils/common/enum.js';
+
 
 const subteamSchema = new Schema({
      title: {
-          type: String
+          type: String,
+          unique: true,
+          required: true
         },
      description: {
        type: String,
        required: false,
      },
-     leader:{
-       type: Schema.Types.ObjectId,
-       ref: 'Member'
-     },
-     teamId: {
-          type: Number,
-          unique: true
-        },
-      totalMembers: {
-        type: Number,
-        default: 0
-      }
+     head:{
+      type: Schema.Types.ObjectId,
+      ref: 'Member'
+    },
+    vice:{
+      type: Schema.Types.ObjectId,
+      ref: 'Member'
+    },
+
+      images:[
+        {
+            type: Object,
+            secure_url:{type:String, required:true},
+            public_id:{type:String, required:true, unique:true},
+        }
+    ],
+    totalMembers: {
+      type: Number,
+      default: 0
+    },
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'Member',
+      required: true
+    },
+    teamId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Team',
+      required: true
+    },
       
 
    }, { timestamps: true });
 
-// Pre-save hook to generate sequential teamId
-subteamSchema.pre('save', async function(next) {
-     if (this.isNew) {
-       try {
-         const lastTeam = await this.constructor.findOne({}, {}, { sort: { 'teamId' : -1 } });
-         this.teamId = lastTeam && lastTeam.teamId ? lastTeam.teamId + 1 : 1;
-       } catch (error) {
-         console.error('Error in pre-save hook:', error);
-         return next(error);
-       }
-     }
-     next();
-   });
 
 export const SubTeam = model("SubTeam", subteamSchema);

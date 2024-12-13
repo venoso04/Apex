@@ -10,7 +10,7 @@ import { systemRoles } from "../../utils/common/enum.js";
 
 const galleryRouter = Router();
 
-galleryRouter.post("/upload-gallery-item",isAuthenticated,multerMiddleHost(allowedExtensions.image).single("image"),validation(uploadImageSchema) ,uploadGalleryImage);
+galleryRouter.post("/upload-gallery-item",isAuthenticated,isAuthorized(systemRoles.ADMIN,systemRoles.SUPER),multerMiddleHost(allowedExtensions.image).single("image"),validation(uploadImageSchema) ,uploadGalleryImage);
 galleryRouter.get("/get-gallery-item",validation(fetchGalleryItemsSchema),fetchGalleryItems);
 galleryRouter.get("/get-gallery-item/:id",getGalleryItemById);
 galleryRouter.delete("/delete-gallery-item/:id",validation(deleteImageSchema),isAuthenticated,isAuthorized(systemRoles.ADMIN,systemRoles.SUPER),deleteGalleryItem);

@@ -1,15 +1,12 @@
 import { Router } from "express";
 import { signUp, login, verifyAccount, resetPassword, sendForgetCode, updatePassword, logout, updateEmail, verifyEmailUpdate, resendVerificationEmail, updateProfilePicture, deleteProfilePicture } from './auth.controller.js';
-// import { isAuthorized } from '../../middleware/authorization.middleware.js';
 import { validation } from '../../middleware/validation.middleware.js';
-// import { isAuthenticated } from "../../middleware/authentication.middleware.js";
 import { forgetCodeSchema, loginSchema, resetPasswordSchema, signUpSchema, updateEmailSchema, updatePasswordSchema, verifyUpdateEmailSchema } from "./auth.validation.js";
 import { isAuthenticated } from "../../middleware/authentication.middleware.js";
 import { resendEmailLimiter } from "../../middleware/rateLimiter.middleware.js";
 import { multerMiddleHost } from "../../middleware/multer.middleware.js";
 import { allowedExtensions } from "../../utils/allowedExtensions.js";
-import { isAuthorized } from "../../middleware/authorization.middleware.js";
-import { systemRoles } from "../../utils/common/enum.js";
+
 
 
 const authRouter = Router();
